@@ -126,10 +126,10 @@ def chart_temp_by_year(df):
     selector = alt.binding_select(options=years, name="Year: ")
     year_param = alt.param(value=years[0], bind=selector)
 
-    return (
+    chart = (
         alt.Chart(df)
         .add_params(year_param)  
-        .transform_filter(alt.datum.year == year_param)
+        .transform_filter(alt.datum.year == year_param) 
         .mark_line()
         .encode(
             x="date:T",
@@ -138,3 +138,5 @@ def chart_temp_by_year(df):
         )
         .properties(height=320)
     )
+
+    return chart
