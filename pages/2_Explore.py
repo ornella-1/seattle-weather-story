@@ -14,3 +14,9 @@ st.markdown("**Guided prompts:**")
 st.write("- Filter to one weather type (e.g., `sun`, `rain`)—does the temperature distribution shift?")
 st.write("- Brush a specific year—do extremes cluster in particular periods?")
 st.write("- Compare histogram shape across weather types—what changes most: center, spread, or tails?")
+
+from charts.charts import chart_temp_by_year
+
+st.header("Additional interactive view: Temperature by year")
+st.write("Use the dropdown to explore how temperature trends changes across different years.")
+st.altair_chart(chart_temp_by_year(df), use_container_width=True)

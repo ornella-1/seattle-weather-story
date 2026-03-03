@@ -107,3 +107,33 @@ def chart_dashboard(df: pd.DataFrame) -> alt.Chart:
     )
 
     return alt.vconcat(line, hist).resolve_scale(color="independent")
+
+def chart_temp_histogram(df):
+    return (
+        alt.Chart(df)
+        .mark_bar()
+        .encode(
+            x=alt.X("temp_max:Q", bin=alt.Bin(maxbins=30), title="Daily max temp (°C)"),
+            y="count()",
+            tooltip=["count()"]
+        )
+        .properties(height=320)
+    )
+
+def chart_temp_by_year(df):
+    years = sorted(df["year"].unique())
+    selector = alt.binding_select(options=years, name="Year: ")
+    year_param = alt.param(value=years[0], bind=selector)
+
+    return (
+        alt.Chart(df)
+        .mark_line()
+        .encode(
+            x="date:T",
+            y="temp_max:Q",
+            tooltip=["date:T", "temp_max:Q"]
+        )
+        .transform_filter(year_param)
+        .add_params(year_param)
+        .properties(height=320)
+    )

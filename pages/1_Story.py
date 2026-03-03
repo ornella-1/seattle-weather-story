@@ -38,3 +38,11 @@ st.header("4) Precipitation vs temperature")
 st.write("We wish to test a plausible explanation: are the warmest days also the driest (or not)?")
 st.altair_chart(chart_explain_precip_vs_temp(df), use_container_width=True)
 st.caption("Takeaway: The relationship is noisy — precipitation alone does not explain extreme heat, motivating more fine-grained exploration.")
+
+
+
+from charts.charts import chart_temp_histogram
+st.header("5) Distribution of daily maximum temperatures")
+st.write("Here we examine how daily maximum temperatures are distributed across the dataset using a histogram.")
+st.altair_chart(chart_temp_histogram(df), use_container_width=True)
+st.caption("Takeaway: The distribution is unimodal with a long right tail, reflecting occasional extreme heat days.")
