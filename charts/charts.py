@@ -123,13 +123,17 @@ def chart_temp_histogram(df):
 
 def chart_temp_by_year(df):
     years = sorted(df["year"].unique())
-    selector = alt.binding_select(options=years, name="Year: ")
-    year_param = alt.param(value=years[0], bind=selector)
+
+    year_param = alt.param(
+        name="year",
+        bind=alt.binding_select(options=years, name="Year: "),
+        value=years[0]
+    )
 
     chart = (
         alt.Chart(df)
-        .add_params(year_param)  
-        .transform_filter(alt.datum.year == year_param) 
+        .add_params(year_param)
+        .transform_filter(alt.datum.year == year_param)
         .mark_line()
         .encode(
             x="date:T",
