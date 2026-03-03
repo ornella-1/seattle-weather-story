@@ -127,13 +127,13 @@ def chart_temp_by_year(df):
 
     return (
         alt.Chart(df)
+        .add_params(year_param)  
+        .transform_filter(year_param)
         .mark_line()
         .encode(
             x="date:T",
             y="temp_max:Q",
             tooltip=["date:T", "temp_max:Q"]
         )
-        .transform_filter(year_param)
-        .add_params(year_param)
         .properties(height=320)
     )

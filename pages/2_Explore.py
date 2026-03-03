@@ -17,6 +17,9 @@ st.write("- Compare histogram shape across weather types—what changes most: ce
 
 from charts.charts import chart_temp_by_year
 
-st.header("Additional interactive view: Temperature by year")
+st.header("Temperature by year")
 st.write("Use the dropdown to explore how temperature trends changes across different years.")
 st.altair_chart(chart_temp_by_year(df), use_container_width=True)
+
+st.write(df.head())
+st.write(df.columns.tolist())
